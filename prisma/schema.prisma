@@ -1,0 +1,50 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Notice {
+  id              String      @id
+  title           String
+  link            String?
+  pblancUrl       String?
+  jrsdInsttNm     String?
+  lcategory       String?
+  hashTagsRaw     String?
+  reqstBeginEndDe String?
+  pubDate         DateTime?
+  creatPnttm      DateTime?
+  inqireCo        Int?
+  bsnsSumryCn     String?
+  flpthNm         String?
+  tags            NoticeTag[]
+  bookmarks       Bookmark[]
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+}
+
+model Tag {
+  id      Int         @id @default(autoincrement())
+  name    String      @unique
+  notices NoticeTag[]
+}
+
+model NoticeTag {
+  noticeId String
+  tagId    Int
+  notice   Notice @relation(fields: [noticeId], references: [id])
+  tag      Tag    @relation(fields: [tagId], references: [id])
+
+  @@id([noticeId, tagId])
+}
+
+model Bookmark {
+  id        Int     @id @default(autoincrement())
+  noticeId  String
+  notice    Notice  @relation(fields: [noticeId], references: [id])
+  createdAt DateTime @default(now())
+}
