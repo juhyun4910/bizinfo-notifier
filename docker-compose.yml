@@ -1,0 +1,14 @@
+version: "3.9"
+services:
+  web:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - BIZINFO_API_KEY=${BIZINFO_API_KEY:-21Ya48}
+      - DATABASE_URL=file:/app/prisma/dev.db
+    volumes:
+      - ./prisma/dev.db:/app/prisma/dev.db
+      - ./prisma/dev.db-journal:/app/prisma/dev.db-journal
+    command: ["npm", "run", "start"]
