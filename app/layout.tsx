@@ -1,15 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { AppProviders } from "./providers";
-import Link from "next/link";
-import { SearchBar } from "@/components/search-bar";
-import { SortSelect } from "@/components/sort-select";
-import { TagQuickFilters } from "@/components/tag-quick-filters";
 import { ReactNode } from "react";
 
 export const metadata: Metadata = {
-  title: "bizinfo-alert | 기업마당 공고 브라우저",
-  description: "기업마당 공고를 빠르게 탐색하고 알림톡 확장까지 고려한 대시보드",
+  title: "bizinfo-alert | 최소 데모",
+  description: "DB 없이 기업마당 API를 직접 호출해 표로 표시",
 };
 
 /**
@@ -19,27 +14,19 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="ko" suppressHydrationWarning>
-      <body className="bg-background text-foreground">
-        <AppProviders>
-          <div className="flex min-h-screen flex-col">
-            <header className="sticky top-0 z-40 border-b bg-background/95 backdrop-blur">
-              <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center gap-4 px-4 py-4 sm:flex-nowrap">
-                <Link href="/" className="text-xl font-bold">bizinfo-alert</Link>
-                <div className="flex flex-1 flex-col gap-3 sm:flex-row sm:items-center">
-                  <SearchBar />
-                  <SortSelect />
-                </div>
-                <TagQuickFilters />
-              </div>
-            </header>
-            <main className="flex-1 bg-muted/10">
-              <div className="mx-auto w-full max-w-6xl px-4 py-8">{children}</div>
-            </main>
-            <footer className="border-t bg-background py-4 text-center text-sm text-muted-foreground">
-              데이터 출처: 기업마당
-            </footer>
-          </div>
-        </AppProviders>
+      <body className="bg-white text-gray-900 dark:bg-neutral-950 dark:text-gray-100">
+        <div className="min-h-screen">
+          <header className="border-b bg-white/95 dark:bg-neutral-950/80 backdrop-blur">
+            <div className="mx-auto w-full max-w-6xl px-4 py-4">
+              <h1 className="text-xl font-bold">bizinfo-alert (DB 없이 데모)</h1>
+              <p className="text-sm text-gray-500">브라우저에서 기업마당 API를 직접 호출합니다.</p>
+            </div>
+          </header>
+          <main className="mx-auto w-full max-w-6xl px-4 py-8">{children}</main>
+          <footer className="border-t bg-white dark:bg-neutral-950 py-4 text-center text-sm text-gray-500">
+            데이터 출처: 기업마당
+          </footer>
+        </div>
       </body>
     </html>
   );

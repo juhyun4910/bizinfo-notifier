@@ -2,16 +2,12 @@
   "name": "bizinfo-alert",
   "version": "1.0.0",
   "private": true,
-  "prisma": {
-    "seed": "ts-node --transpile-only prisma/seed.ts"
-  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "jest",
-    "import": "curl -X POST http://localhost:3000/api/import"
+    "test": "jest"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
